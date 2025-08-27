@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dark-green: #2a2a2a;
+  --med-green: #00743e;
+  --lt-green: #4a9a72;
+  --blue: #4a6adc;
+  --black: black;
+  --white: white;
+}
+
+body,
+button {
+  background-color: var(--black);
+  margin: 5rem 5rem;
+  font-family: kallisto, sans-serif;
+}
+
+body {
+  min-width: 1100px;
+}
+
+header {
+  font-family: alfabet, sans-serif;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas:
+    "aside message message empty"
+    "aside p1 p2 empty"
+    "aside p1 p2 empty";
+}
+
+header {
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  grid-area: message;
+}
+
+header p {
+  padding: 1.4rem;
+  font-size: 1.1rem;
+  line-height: 1.7rem;
+}
+
+#joel {
+  max-width: 205px;
+  height: auto;
+}
+
+section,
+aside,
+header,
+header img,
+#emptycol {
+  outline: 2px solid var(--black);
+}
+
+section h2,
+h3 {
+  outline: 2px solid var(--black);
+}
+
+input,
+select,
+button {
+  border: 2px solid var(--black);
+}
+
+section {
+  background-color: var(--lt-green);
+  text-align: center;
+}
+
+section h2,
+aside h3 {
+  background-color: var(--med-green);
+  padding: 0.4rem 0.7rem;
+  display: inline-block;
+}
+
+section h2 {
+  margin: 1.5rem auto;
+}
+
+aside p {
+  font-size: 3rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+aside h3 {
+  margin: 0.2rem auto;
+}
+
+button {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.5rem;
+}
+
+#playerone {
+  grid-area: p1;
+}
+
+#playertwo {
+  grid-area: p2;
+}
+
+.cards img {
+  width: 15%;
+}
+
+.input {
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+
+input {
+  background-color: var(--white);
+  padding: 0.4rem 0.5rem;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+}
+
+select {
+  width: 10rem;
+  padding: 0.36rem 0.8rem;
+}
+
+#p1button,
+#p2button {
+  width: 50%;
+}
+
+aside,
+#emptycol {
+  background-color: var(--dark-green);
+}
+
+aside {
+  grid-area: aside;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+#emptycol {
+  grid-area: empty;
+}
+
+button {
+  background-color: var(--blue);
+  font-size: 1.5rem;
+  width: 60%;
+  margin: 0 auto;
+  margin-bottom: 2.2rem;
+}
+
+button:hover,
+#p1button:hover,
+#p2button:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Card Sharks Game</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="https://use.typekit.net/agf7qvj.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/agf7qvj.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <p>
+          Welcome to Card Sharks! The show where fortunes are won, egos are
+          crushed, and absolutely no one leaves here with their dignity intact.
+          I’m your host, Joel McHale—think of me as your dealer, your therapist,
+          and your sarcastic uncle all rolled into one. Press either button
+          below to continue.
+        </p>
+        <img src="images/smile.jpg" alt="Joel Mchale" id="joel" />
+      </header>
+      <section id="playerone">
+        <h2>Player One</h2>
+        <div class="cards">
+          <img src="images/unflipped card.svg" alt="" id="p1card1" />
+          <img src="images/unflipped card.svg" alt="" id="p1card2" />
+          <img src="images/unflipped card.svg" alt="" id="p1card3" />
+          <img src="images/unflipped card.svg" alt="" id="p1card4" />
+          <img src="images/unflipped card.svg" alt="" id="p1card5" />
+        </div>
+        <div class="input">
+          <label for="p1input" class="hidden"></label>
+          <input type="text" id="p1input" name="p1input" />
+          <select id="select1" name="measure"></select>
+        </div>
+        <img src="images/p1buttonLit.svg" alt="" id="p1button" />
+      </section>
+      <section id="playertwo">
+        <h2>Player Two</h2>
+        <div class="cards">
+          <img src="images/unflipped card.svg" alt="" id="p2card1" />
+          <img src="images/unflipped card.svg" alt="" id="p2card2" />
+          <img src="images/unflipped card.svg" alt="" id="p2card3" />
+          <img src="images/unflipped card.svg" alt="" id="p2card4" />
+          <img src="images/unflipped card.svg" alt="" id="p2card5" />
+        </div>
+        <div class="input">
+          <label for="p2input" class="hidden"></label>
+          <input type="text" id="p2input" name="p2input" />
+          <select id="select2" name="measure2"></select>
+        </div>
+        <img src="images/p2buttonLit.svg" alt="" id="p2button" />
+      </section>
+      <aside>
+        <h3>Round</h3>
+        <p id="round">1</p>
+        <h3>Player One</h3>
+        <p id="p1score">0</p>
+        <h3>Player Two</h3>
+        <p id="p2score">0</p>
+      </aside>
+      <div id="emptycol"></div>
+    </main>
+    <script src="script.js" defer></script>
+  </body>
+</html>
