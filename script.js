@@ -161,8 +161,8 @@ const incorrectMessages = [
 const questions = [
   {
     question:
-      "1500 Redditors were polled: “Should phones be banned in schools?” What percent supported phone banning?",
-    answer: "35%",
+      "1400 Redditors were polled: “How do you pronounce Gif?” What percentage of Redditors answered 'Gif' as opposed to 'Jif'?",
+    answer: "22%",
   },
 
   {
