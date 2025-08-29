@@ -161,7 +161,7 @@ const incorrectMessages = [
 const questions = [
   {
     question:
-      "1400 Redditors were polled: “How do you pronounce Gif?” What percentage of Redditors answered 'Gif' as opposed to 'Jif'?",
+      "1400 Redditors were polled: “How do you pronounce Gif?” What percentage of Redditors answered 'Jif' as opposed to 'Gif'?",
     answer: "22%",
   },
 
