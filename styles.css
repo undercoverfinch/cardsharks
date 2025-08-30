@@ -33,9 +33,9 @@ main {
   grid-template-columns: 1fr 2fr 2fr 1fr;
   grid-template-rows: 1fr 2fr;
   grid-template-areas:
-    "aside message message empty"
-    "aside p1 p2 empty"
-    "aside p1 p2 empty";
+    "aside message message rightCol"
+    "aside p1 p2 rightCol"
+    "aside p1 p2 rightCol";
 }
 
 header {
@@ -60,7 +60,7 @@ section,
 aside,
 header,
 header img,
-#emptycol {
+#emptyCol {
   outline: 2px solid var(--black);
 }
 
@@ -81,10 +81,14 @@ section {
 }
 
 section h2,
-aside h3 {
+h3 {
   background-color: var(--med-green);
   padding: 0.4rem 0.7rem;
   display: inline-block;
+}
+
+h3 {
+  min-width: 130.398px;
 }
 
 section h2 {
@@ -97,7 +101,13 @@ aside p {
   margin-bottom: 1rem;
 }
 
-aside h3 {
+#questionPrediction p {
+  min-height: 3.6rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+h3 {
   margin: 0.2rem auto;
 }
 
@@ -138,6 +148,7 @@ select:focus {
 
 select {
   width: 10rem;
+  max-height: 32.3px;
   padding: 0.36rem 0.8rem;
 }
 
@@ -147,20 +158,42 @@ select {
 }
 
 aside,
-#emptycol {
+#emptyCol {
   background-color: var(--dark-green);
 }
 
 aside {
   grid-area: aside;
+  padding-top: 1rem;
+}
+
+#emptyCol {
+  grid-area: rightCol;
+}
+
+#questionPrediction p:first-of-type {
+  min-height: 6rem;
+  font-size: 0.7rem;
+  padding-top: 0.3rem;
+  padding-left: 27px;
+  padding-right: 27px;
+  line-height: 1rem;
+}
+
+#questionPrediction p:last-of-type {
+  font-size: 2.5rem;
+  padding-top: 0.3rem;
+}
+
+/* #questionPrediction p:last-of-type {
+  font-size: 1.5rem;
+} */
+
+aside {
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-}
-
-#emptycol {
-  grid-area: empty;
 }
 
 button {

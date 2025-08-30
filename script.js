@@ -27,6 +27,8 @@ let p2Score = parseInt(p2ScoreString);
 const p1Button = document.getElementById("p1button");
 const p2Button = document.getElementById("p2button");
 const joel = document.getElementById("joel");
+const questionElement = document.getElementById("currentQuestion");
+const answerElement = document.getElementById("currentAnswer");
 
 let p1Card1flipped = false;
 let p1Card2flipped = false;
@@ -163,6 +165,8 @@ const questions = [
     question:
       "1400 Redditors were polled: “How do you pronounce Gif?” What percentage of Redditors answered 'Jif' as opposed to 'Gif'?",
     answer: "22%",
+    display:
+      "How do you pronounce Gif? What percent answered 'Jif' as opposed to 'Gif'?",
   },
 
   {
@@ -176,6 +180,8 @@ const questions = [
       "The subreddit r/dogswearinghats is home to 62k canine enthusiasts. How many members does r/catswitheyeliner have?",
     answer: "42k",
     options: ["k", "m"],
+    display:
+      "r/dogswearinghats has 62k members. How many members does r/catswitheyeliner currently have?",
   },
   {
     question:
@@ -184,24 +190,32 @@ const questions = [
   },
   {
     question:
-      "Seventeen markets were surveyed globally, what percentage of people find putting your feet up in the movie theatre unacceptable?",
+      "Seventeen markets were surveyed globally, what percentage of people said putting your feet up in the movie theatre unacceptable?",
     answer: "84%",
+    display:
+      "What percentage of people said putting your feet up in the movie theatre unacceptable?",
   },
   {
     question:
       "r/breadstapledtotrees currently has 335k members. How many does r/treesstapledtobread have?",
     answer: "4.4k",
     options: ["k", "m"],
+    display:
+      "r/breadstapledtotrees currently has 335k members. How many does the subreddit r/treesstapledtobread have right now?",
   },
   {
     question:
       "A post in r/polls asked: “Would you delete your account if I offered to pay your karma in USD?” What percent of people refused?",
     answer: "15%",
+    display:
+      "Would you delete your account if I offered to pay your karma in USD? What percent refused?",
   },
   {
     question:
       "Spider-Man was the most Googled superhero worldwide (in a 2024 study across 113 countries). In what percentage of countries did he come out on top?",
     answer: "48.7%",
+    display:
+      "In what percentage of countries was Spiderman the most googled superhero?",
   },
   {
     question:
@@ -219,6 +233,8 @@ const questions = [
       "657k bird watchers have joined r/birding. How many people have joined its estranged cousin, r/birdswitharms?",
     answer: "1.1m",
     options: ["k", "m"],
+    display:
+      "657k bird watchers have joined r/birding. How many people have joined the subreddit, r/birdswitharms?",
   },
 
   {
@@ -229,6 +245,8 @@ const questions = [
     question:
       "1500 Redditors answered: “Would you press a button that kills a random person but gives you 1 thousand USD?” What percent of people took the money?",
     answer: "36%",
+    display:
+      "Would you press a button that kills a random person but gives you 1 thousand USD? What percent of Redditors took the blood money?",
   },
   {
     question:
@@ -240,11 +258,15 @@ const questions = [
     question:
       "Horror is one of the fastest growing genres of this decade. In 2025, what percentage of North American movie ticket sales were for this genre? ",
     answer: "17%",
+    display:
+      "In 2025, what percentage of North American movie ticket sales were for the horror genre?",
   },
   {
     question:
       "A post in r/polls asked: “If all drugs were legalized would you start to use them?” What percentage of people answered ‘Yes or I already use them’?",
     answer: "24%",
+    display:
+      "If all drugs were legalized would you start to use them? What percent answered ‘Yes’?",
   },
   {
     question:
@@ -272,17 +294,26 @@ const questions = [
     question:
       "Australians lead the world in Reddit usage per capita. What percentage of Australians over 16 use Reddit?",
     answer: "33%",
+    display: "What percentage of Australians over 16 use Reddit?",
   },
   {
     question:
       "1000 Redditors were polled: “If you had the chance to know the exact date of your death, would you do it?” What percent said ‘No’?",
     answer: "57%",
+    display:
+      "If you had the chance to know the exact date of your death, would you do it? What percent said ‘No’?",
   },
-  { question: "What percentage of Reddit is scared of dogs?", answer: "37%" },
+  {
+    question: "What percentage of Reddit is scared of dogs?",
+    answer: "37%",
+    display: "What percentage of Reddit is scared of doggos?",
+  },
   {
     question:
       "In a study by Hulcr et al, 60 belly buttons were sampled. How many different species of bacteria were found?",
     answer: "2368",
+    display:
+      "60 belly buttons were sampled. How many different species of bacteria were found?",
   },
   {
     question:
@@ -293,17 +324,22 @@ const questions = [
     question:
       "A poll in r/polls asked: “Would you prefer extra love, extra time, or extra money?” What percentage of Redditors chose ‘extra time’?",
     answer: "47%",
+    display:
+      "Would you prefer extra love, extra time, or extra money? What percent chose ‘extra time’?",
   },
   {
     question:
       "What percentage of people admit to talking to themselves out loud?",
     answer: "25%",
+    display: "What percentage of people admit to talking to themselves aloud?",
   },
 
   {
     question:
       "Let’s find out about Reddit’s gaming preferences! What percent of Reddit gamers prefer first person over third person?",
     answer: "46%",
+    display:
+      "What percent of Reddit gamers prefer first person over third person?",
   },
 ];
 
@@ -343,6 +379,15 @@ let roundWinner = null;
 let incorrectGuess = false;
 let chosenCardName = null;
 
+function isPercentage(str) {
+  // Matches:
+  // - One or more digits
+  // - Optional decimal (like 99.9)
+  // - Optional space
+  // - Ends with "%" or "percent"
+  return /^\d+(\.\d+)?\s*(%|percent)$/i.test(str);
+}
+
 function storedAnswer(playerInput, playerSelect, player) {
   let answer = playerInput.value.trim();
   let drop = playerSelect.value;
@@ -353,6 +398,19 @@ function storedAnswer(playerInput, playerSelect, player) {
   currentAnswer = parseFloat(answer);
   currentDrop = drop;
   answeringPlayer = player;
+
+  if (isPercentage(fullAnswer) || drop == "") {
+    answerElement.style.fontSize = "2.5rem";
+    answerElement.textContent = fullAnswer;
+  } else {
+    if (drop.length === 1) {
+      answerElement.style.fontSize = "2.5rem";
+      answerElement.textContent = currentAnswer + drop;
+    } else {
+      answerElement.textContent = currentAnswer + " " + drop;
+      answerElement.style.fontSize = "1rem";
+    }
+  }
 
   playerInput.value = "";
   playerSelect.innerHTML = "";
@@ -392,11 +450,19 @@ function buttonLighter() {
 
 function questionRound() {
   buttonLighter();
+  cardGuess = false;
   const q = questions[qIndex];
   joel.src = "images/smile.jpg";
   p1Select.innerHTML = "";
   p2Select.innerHTML = "";
   message.textContent = q.question;
+  console.log(questionElement);
+
+  if ("display" in q) {
+    questionElement.textContent = q.display;
+  } else {
+    questionElement.textContent = q.question;
+  }
 
   if (answeringPlayer == "p1") {
     if (q.options && q.options.length > 0) {
@@ -457,6 +523,8 @@ function checkWinner(answeringPlayer) {
 
   joel.src = "images/correctjoel.jpg";
   message.textContent = `${winner} wins the question round! ${questions[qIndex].question} ${correctAnswer}!`;
+  answerElement.textContent = "";
+  questionElement.textContent = "";
   p1Select.innerHTML = "";
   p2Select.innerHTML = "";
 
@@ -482,6 +550,8 @@ function nextRound() {
   fullAnswer = null;
   p1Select.innerHTML = "";
   p2Select.innerHTML = "";
+  questionElement.textContent = "";
+  answerElement.textContent = "";
 
   if (previousCardValueP1) {
     freeCardP1 = true;
@@ -552,12 +622,11 @@ function higherOrLower(playerSelect) {
 
   return true;
 }
-
+let previousCardValue = null;
 function pickCard(deck) {
   let randomIndex = Math.floor(Math.random() * deck.length);
   let chosenCard = deck[randomIndex];
   chosenCardName = chosenCard.name;
-  console.log(`Chosen card: ${chosenCardName}`);
   deck.splice(randomIndex, 1);
   return chosenCard;
 }
@@ -786,10 +855,10 @@ p1button.addEventListener("click", () => {
 
   if (flipping == true && cardGuess) {
     currentCardGuess = p1Select.value;
+    console.log(`Current card guess: ${currentCardGuess}`);
     if (!freeCardP1) {
       guessCard(currentCardGuess, chosenCard, previousCardValueP1);
     }
-    cardGuess = false;
     cardFlip();
     buttonLighter();
     return;
@@ -853,10 +922,10 @@ p2button.addEventListener("click", () => {
 
   if (flipping == true && cardGuess) {
     currentCardGuess = p2Select.value;
+    console.log(`Current card guess: ${currentCardGuess}`);
     if (!freeCardP2) {
       guessCard(currentCardGuess, chosenCard, previousCardValueP2);
     }
-    cardGuess = false;
     cardFlip();
     buttonLighter();
     return;
